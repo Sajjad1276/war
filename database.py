@@ -1759,7 +1759,11 @@ class Transaction(Base):
 
     __tablename__ = "transactions"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+    )
 
     user_id: Mapped[Optional[int]] = mapped_column(
         BigInteger,
@@ -1773,15 +1777,28 @@ class Transaction(Base):
         nullable=True,
     )
 
-    transaction_type: Mapped[str] = mapped_column(String(32), nullable=False)
+    transaction_type: Mapped[str] = mapped_column(
+        String(32),
+        nullable=False,
+    )
 
-    amount: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    amount: Mapped[int] = mapped_column(
+        BigInteger,
+        nullable=False,
+    )
 
-    balance_after: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    balance_after: Mapped[int] = mapped_column(
+        BigInteger,
+        nullable=False,
+    )
 
-    description: Mapped[Optional[str]] = mapped_column(String(256), nullable=True)
+    description: Mapped[Optional[str]] = mapped_column(
+        String(256),
+        nullable=True,
+    )
 
-    metadata: Mapped[dict[str, Any]] = mapped_column(
+    transaction_metadata: Mapped[dict[str, Any]] = mapped_column(
+        "metadata",
         JSONB,
         default=dict,
         nullable=False,
