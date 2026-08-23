@@ -1696,7 +1696,11 @@ class CityHistory(Base):
 
     __tablename__ = "city_history"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+    )
 
     city_id: Mapped[int] = mapped_column(
         Integer,
@@ -1704,7 +1708,10 @@ class CityHistory(Base):
         nullable=False,
     )
 
-    event_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    event_type: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False,
+    )
 
     actor_user_id: Mapped[Optional[int]] = mapped_column(
         BigInteger,
@@ -1712,11 +1719,18 @@ class CityHistory(Base):
         nullable=True,
     )
 
-    title: Mapped[str] = mapped_column(String(256), nullable=False)
+    title: Mapped[str] = mapped_column(
+        String(256),
+        nullable=False,
+    )
 
-    description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    description: Mapped[Optional[str]] = mapped_column(
+        Text,
+        nullable=True,
+    )
 
-    metadata: Mapped[dict[str, Any]] = mapped_column(
+    history_metadata: Mapped[dict[str, Any]] = mapped_column(
+        "metadata",
         JSONB,
         default=dict,
         nullable=False,
@@ -1728,13 +1742,14 @@ class CityHistory(Base):
         nullable=False,
     )
 
-    city: Mapped["City"] = relationship(back_populates="history")
+    city: Mapped["City"] = relationship(
+        back_populates="history",
+    )
 
     __table_args__ = (
         Index("ix_cityhistory_city_id", "city_id"),
         Index("ix_cityhistory_created_at", "created_at"),
     )
-
 
 # ================================================================
 # مدل: تراکنش مالی
